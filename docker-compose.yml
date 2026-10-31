@@ -1,0 +1,17 @@
+services:
+  oasis-meta:
+    build: .
+    container_name: oasis_meta
+    restart: unless-stopped
+    environment:
+      DB_HOST: ${DB_HOST:-bookoasis_mariadb}
+      DB_USER: oasis_ro
+      DB_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - "${PORT:-5931}:8000"
+    networks:
+      - bookoasis
+networks:
+  bookoasis:
+    external: true
+    name: ${BOOKOASIS_NETWORK:-bookoasis_default}
