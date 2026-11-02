@@ -121,8 +121,10 @@ def like(t):
 
 def common_where(series_search=False):
     where, params = ["COALESCE(is_deleted, 0) = 0"], []
-    if request.args.get("library_id"):
-        where.append("library_id = %s"); params.append(int(request.args["library_id"]))
+    # one category or several: library_id=3 or library_id=3,7,12
+    libs = [int(x) for x in request.args.get("library_id", "").split(",") if x.strip().isdigit()]
+    if libs:
+        where.append("library_id IN (" + ",".join(["%s"] * len(libs)) + ")"); params += libs
     fmts = [f.strip().lower() for f in request.args.get("format", "").split(",") if f.strip()]
     if fmts:
         where.append("LOWER(file_format) IN (" + ",".join(["%s"] * len(fmts)) + ")"); params += fmts
