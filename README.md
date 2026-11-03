@@ -50,7 +50,7 @@ bash install.sh
 | `GET /books/{id}` | 권 하나 + `summary`(줄거리), `summary_trust`(`ok`·`suspect`·null) |
 
 - 표지는 `cover_url`(북오아시스 기준 경로)을 북오아시스 주소에 붙여 받습니다. 책 파일도 `download_path`로 북오아시스에서 받습니다.
-- `summary_trust`가 `suspect`인 줄거리는 북오아시스가 네이버 쇼핑 검색 결과 첫 항목을 그대로 가져온 것으로, 절반 이상이 다른 책 소개였습니다(표본 조사). 그 외 출처는 표본 60개 중 오염 0건이었습니다.
+- `summary_trust`가 `suspect`인 줄거리는 자동 검색 결과로 채워진 소개라 같은 제목의 다른 책 것일 수 있어, 앱이 접어 두고 안내합니다.
 
 ## 구조
 
