@@ -45,7 +45,7 @@ bash install.sh
 |---|---|
 | `GET /health` | DB 연결 확인 (인증 없음) |
 | `GET /libraries` | 라이브러리(카테고리) 목록 |
-| `GET /series` | 시리즈(부모 폴더) 목록: 권 수, 최근 파일 날짜, 대표 표지 · `library_id`(쉼표로 여러 개: `3,7`), `q`, `format`, `sort`(`mtime_desc`·`mtime_asc`·`added_desc`·`added_asc`·`name`), `page`, `limit` |
+| `GET /series` | 시리즈(부모 폴더) 목록: 권 수, 최근 파일 날짜, 대표 표지 · `library_id`(쉼표로 여러 개: `3,7`), `q`, `format`, `sort`(`mtime_desc`·`mtime_asc`·`added_desc`·`added_asc`·`name`·`name_desc`), `page`, `limit` |
 | `GET /books` | 권 목록: 정리된 제목(`display_title`), 형식, 크기, 쪽수, 파일 날짜, 표지, 다운로드 경로 · `series`, `library_id`(쉼표로 여러 개), `q`, `format`, `sort`(… `title`), `page`, `limit` |
 | `GET /books/{id}` | 권 하나 + `summary`(줄거리), `summary_trust`(`ok`·`suspect`·null) |
 

@@ -184,7 +184,8 @@ def book(book_id):
     return jsonify(out)
 
 SERIES_SORTS = {"mtime_desc": "latest_mtime DESC", "mtime_asc": "latest_mtime ASC",
-                "added_desc": "latest_added DESC", "added_asc": "latest_added ASC", "name": "series_name ASC"}
+                "added_desc": "latest_added DESC", "added_asc": "latest_added ASC", "name": "series_name ASC",
+                "name_desc": "series_name DESC"}
 _series_cache, SERIES_TTL = {}, 60
 
 @app.get("/series")
