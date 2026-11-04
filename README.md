@@ -62,7 +62,9 @@ OG Reader ──② 시리즈·제목·줄거리 묻기──▶ oasis-meta ─�
 
 ## OG Reader
 
-북오아시스 전용 안드로이드 전자책·만화 리더입니다. 앱의 설정 › 메타 API 안내에서 이 문서와 같은 내용을 볼 수 있습니다.
+북오아시스용 안드로이드 전자책·만화·PDF·오디오북 리더입니다. oasis-meta 주소를 앱의 서버 설정 › **메타 API 주소**에 넣으면 시리즈별 보기·줄거리·카테고리/형식 필터·목록 개수가 켜집니다.
+
+- 내려받기: [최신 APK](https://github.com/ohnggni/oasis-reader/releases/latest/download/OasisReader.apk) · [릴리스 목록](https://github.com/ohnggni/oasis-reader/releases/latest)
 
 ## 라이선스
 
