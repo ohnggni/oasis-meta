@@ -170,7 +170,11 @@ def books():
         where.append("COALESCE(series_name, '') = %s"); params.append(request.args["series"])
     rows = q(g.db, f"SELECT {BOOK_COLS} FROM books WHERE {' AND '.join(where)} ORDER BY {sort} LIMIT %s OFFSET %s",
              (*params, limit + 1, offset))
-    return jsonify(items=[book_out(r) for r in rows[:limit]], page=page, limit=limit, has_more=len(rows) > limit)
+    body = dict(items=[book_out(r) for r in rows[:limit]], page=page, limit=limit, has_more=len(rows) > limit)
+    # how many match in all (first page only: the app shows it once per list)
+    if page == 1:
+        body["total"] = q(g.db, f"SELECT COUNT(*) AS n FROM books WHERE {' AND '.join(where)}", tuple(params))[0]["n"]
+    return jsonify(body)
 
 @app.get("/books/<int:book_id>")
 @auth
@@ -217,5 +221,11 @@ def series():
               "first_book_id": r["first_book_id"],
               "cover_url": cover_url(covers.get(r["first_book_id"]))} for r in rows]
     body = dict(items=items, page=page, limit=limit, has_more=has_more)
+    # how many series (and books in them) match in all — first page only
+    if page == 1:
+        t = q(g.db, f"""SELECT COUNT(*) AS series, COALESCE(SUM(n), 0) AS books FROM (
+                SELECT COUNT(*) AS n FROM books WHERE {' AND '.join(where)}
+                GROUP BY library_id, COALESCE(series_name, '')) t""", tuple(params))[0]
+        body["total"] = int(t["series"]); body["total_books"] = int(t["books"])
     _series_cache[key] = (time.time() + SERIES_TTL, body)
     return jsonify(body)
